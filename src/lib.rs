@@ -98,8 +98,14 @@ macro_rules! paged_routes {
                 "Equivalent to `/api/v1/",
                 $url,
                 "`\n# Errors\nIf `access_token` is not set."),
-            pub fn $name(&self) -> Result<Page<$ret>> {
-                let url = self.route(concat!("/api/v1/", $url));
+            pub fn $name<'a, S>(&self, request: S) -> Result<Page<$ret>>
+                   where S: Into<Option<StatusesRequest<'a>>> {
+                let mut url = self.route(concat!("/api/v1/", $url));
+
+                if let Some(request) = request.into() {
+                    url = format!("{}{}", url, request.to_querystring());
+                }
+
                 let response = self.client.$method(&url)
                     .headers(self.headers.clone())
                     .send()?;
