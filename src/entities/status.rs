@@ -33,6 +33,8 @@ pub struct Status {
     /// The number of reblogs for the status.
     pub reblogs_count: u64,
     /// The number of favourites for the status.
+    pub replies_count: u64,
+    /// The number of replies for the status.
     pub favourites_count: u64,
     /// Whether the application client has reblogged the status.
     pub reblogged: Option<bool>,
