@@ -20,7 +20,8 @@ pub struct Attachment {
     /// (only present on local images)
     pub text_url: Option<String>,
     /// Meta information about the attachment.
-    #[serde(deserialize_with="empty_as_none")]
+    //#[serde(deserialize_with="empty_as_none")]
+    #[serde(skip_deserializing)]
     pub meta: Option<Meta>,
     /// Noop will be removed.
     pub description: Option<String>,
