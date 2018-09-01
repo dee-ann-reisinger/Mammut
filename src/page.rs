@@ -40,6 +40,7 @@ macro_rules! pages {
 impl<'a, T: for<'de> Deserialize<'de>> Page<'a, T> {
     pub fn new(mastodon: &'a Mastodon, response: Response) -> Result<Self> {
         let (prev, next) = get_links(&response)?;
+        println!("{:?} {:?}", &prev, &next);
         Ok(Page {
             initial_items: deserialise(response)?,
             next,
